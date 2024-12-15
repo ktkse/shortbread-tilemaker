@@ -759,6 +759,9 @@ function process_street_labels()
 	local name = Find("name")
 	local mz = inf_zoom
 	local kind = ""
+	if highway == "" then
+		highway = Find("railway")
+	end
 	if highway == "motorway" then
 		mz = 10
 		kind = highway
@@ -790,6 +793,13 @@ function process_street_labels()
 		link = true
 	elseif highway == "unclassified" or highway == "residential" or highway == "busway" or highway == "bus_guideway" or highway == "living_street" or highway == "pedestrian" or highway == "track" or highway == "service" or highway == "footway" or highway == "steps" or highway == "path" or highway == "cycleway" then
 		mz = 14
+		kind = highway
+	elseif highway == "rail" or highway == "narrow_gauge" then
+		mz = 8
+		kind = highway
+	elseif highway == "light_rail" or highway == "tram" or highway == "subway"
+		or highway == "funicular" or highway == "monorail" then
+		mz = 10
 		kind = highway
 	end
 	local refs = ""
